@@ -1267,7 +1267,6 @@ textarea:focus + label {
     display:grid;
     width:80%;
     height:68vh;
-    background-color:#ddd;
     border-radius:18px;
     overflow:hidden;
   }
