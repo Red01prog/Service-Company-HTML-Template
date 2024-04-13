@@ -518,18 +518,18 @@ button:hover{
 }
 @keyframes shwitchIt{
     from{
-        background-image:url(../data/company-1.jpg);
+        background-image:url(data/company-1.jpg);
     }
     to{
-        background-image:url(../data/company-2.jpg);
+        background-image:url(data/company-2.jpg);
     }
 }
 @keyframes shwitchIt2{
     from{
-        background-image:url(../data/company-2.jpg);
+        background-image:url(data/company-2.jpg);
     }
     to{
-        background-image:url(../data/company-1.jpg);
+        background-image:url(data/company-1.jpg);
     }
 }
 .about-holder{
