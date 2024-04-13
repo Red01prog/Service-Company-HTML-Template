@@ -246,7 +246,7 @@ submit.addEventListener('click', function() {
     cmnholder.appendChild(comment);
 });
 
-//nav bar
+// Cache DOM elements
 let head = document.getElementById('head');
 let companyLogo = document.getElementById('companyLogo');
 let btn1 = document.getElementById('btn1');
@@ -254,55 +254,57 @@ let title = document.querySelector('.title');
 let ul = document.getElementById('ul');
 let menu = document.getElementById('menu');
 
-
- window.onscroll = function(){
-    if(scrollY > 300 && localStorage.getItem('value') == 'dark'){
-        head.style.height='70px';
-        companyLogo.style.width = '40px';
-        head.style.background='var(--bgclr1)';
-        btn1.style.display='block';
-        menu.style.top ='70px';
-        title.style.fontSize='25px';
-        ul.style.fontSize='17px';
-        
-    }else if(localStorage.getItem('value') == 'dark'){
-        head.style.height = '140px';
-        companyLogo.style.width = '50px';
-        head.style.background='var(--bgclr2)';
-        menu.style.top ='140px';
-        btn1.style.display='none';
-        title.style.fontSize='28px';
-        ul.style.fontSize='17px';
-        
-
-    }else if(scrollY > 300 && localStorage.getItem('value') == 'light'){
-        head.style.height='70px';
-        companyLogo.style.width = '40px';
-        head.style.background='var(--bgclr1)';
-        head.style.boxShadow = '0.00px 1.00px 28px 0px rgba(0, 0, 0, 0.12)';
-        btn1.style.display='block';
-        menu.style.top ='70px';
-        title.style.fontSize='25px';
-        ul.style.fontSize='17px';
-        
-    }else if(localStorage.getItem('value') == 'light'){
-        head.style.height = '140px';
-        companyLogo.style.width = '50px';
-        head.style.background='var(--bgclr2)';
-        head.style.boxShadow = '0.00px 0px 0px 0px rgba(0, 0, 0, 0)';
-        menu.style.top ='140px';
-        btn1.style.display='none';
-        title.style.fontSize='28px';
-        ul.style.fontSize='17px';
+// Debounce function to limit the number of scroll event calls
+function debounce(func, wait, immediate) {
+  var timeout;
+  return function() {
+    var context = this, args = arguments;
+    var later = function() {
+      timeout = null;
+      if (!immediate) func.apply(context, args);
     };
-    if(scrollY>300 && screen.availWidth < 850){
-        btn1.style.display='none';
-        
-    }
-    animation1();
-    animation2();
-    showIt1();
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
   };
+};
+
+// Handle scroll event
+function handleScroll() {
+  let value = localStorage.getItem('value');
+  let isDark = value === 'dark';
+  let isLight = value === 'light';
+  let isSmallScreen = screen.availWidth < 850;
+  let isScrolledDown = scrollY > 300;
+
+  // Common style changes
+  head.style.height = isScrolledDown ? '70px' : '140px';
+  companyLogo.style.width = isScrolledDown ? '40px' : '50px';
+  menu.style.top = isScrolledDown ? '70px' : '140px';
+  title.style.fontSize = isScrolledDown ? '25px' : '28px';
+  ul.style.fontSize = '17px'; // This remains constant, no need for condition
+
+  // Style changes based on theme
+  if (isDark) {
+    head.style.background = isScrolledDown ? 'var(--bgclr1)' : 'var(--bgclr2)';
+  } else if (isLight) {
+    head.style.background = isScrolledDown ? 'var(--bgclr1)' : 'var(--bgclr2)';
+    head.style.boxShadow = isScrolledDown ? '0.00px 1.00px 28px 0px rgba(0, 0, 0, 0.12)' : '0.00px 0px 0px 0px rgba(0, 0, 0, 0)';
+  }
+
+  // Button display logic
+  btn1.style.display = (isScrolledDown && !isSmallScreen) ? 'block' : 'none';
+
+  // Call other functions
+  animation1();
+  animation2();
+  showIt1();
+}
+
+// Attach debounced scroll event
+window.onscroll = debounce(handleScroll, 10);
+
   //sign in / sign up
   let exitbtn1 = document.getElementById('exitbtn1');
   let signinHolder = document.querySelector('.signin-holder');
