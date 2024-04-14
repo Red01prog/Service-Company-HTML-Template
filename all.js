@@ -202,7 +202,7 @@ create.addEventListener('click', function() {
 
 submit.addEventListener('click', function() {
     const img = document.createElement('img');
-    img.setAttribute('src', '../data/profile.png');
+    img.setAttribute('src', 'data/profile.png');
 
     const h3 = document.createElement('h3');
     h3.appendChild(document.createTextNode(forname.value));
