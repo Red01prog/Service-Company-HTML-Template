@@ -286,12 +286,8 @@ function handleScroll() {
   ul.style.fontSize = '17px'; // This remains constant, no need for condition
 
   // Style changes based on theme
-  if (isDark) {
-    head.style.background = isScrolledDown ? 'var(--bgclr1)' : 'var(--bgclr2)';
-  } else if (isLight) {
     head.style.background = isScrolledDown ? 'var(--bgclr1)' : 'var(--bgclr2)';
     head.style.boxShadow = isScrolledDown ? '0.00px 1.00px 28px 0px rgba(0, 0, 0, 0.12)' : '0.00px 0px 0px 0px rgba(0, 0, 0, 0)';
-  }
 
   // Button display logic
   btn1.style.display = (isScrolledDown && !isSmallScreen) ? 'block' : 'none';
