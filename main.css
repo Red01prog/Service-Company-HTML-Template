@@ -547,7 +547,7 @@ button:hover{
     display:block;
 }
 .div2 .about-img{
-    background-image:url(../data/company-1.jpg);
+    background-image:url(data/company-1.jpg);
     background-size:cover;
     overflow:hidden;
 }
