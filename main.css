@@ -381,7 +381,7 @@ button:hover{
     cursor:pointer;
 }
 #menu{
-    background:var(--bgclr2);
+    background:var(--bgclr1);
     display:flex;
     position: fixed;
     top:140px;
